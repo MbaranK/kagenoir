@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Ilan {
+  id        String   @id @default(cuid())
+  baslik    String
+  aciklama  String
+  fiyat     Float
+  kategori  String
+  konum     String?
+  resimler  String   // JSON array of Cloudinary URLs
+  aktif     Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
