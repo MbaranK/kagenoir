@@ -67,7 +67,7 @@ export default function AnaSayfa() {
             <p className="text-[10px] font-light uppercase tracking-[0.4em] text-stone-400 sm:text-[11px]">Follow us</p>
             <div className="mt-5 space-y-3 sm:mt-8 sm:space-y-4">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/kagenoir.jewelry?utm_source=qr"
                 target="_blank"
                 rel="noreferrer"
                 className="group flex items-center justify-between rounded-full border border-stone-700 bg-stone-800/30 px-4 py-3 text-sm font-light text-stone-300 transition hover:border-rose-600/50 hover:bg-rose-900/20 hover:text-rose-300"
@@ -79,7 +79,7 @@ export default function AnaSayfa() {
                 <span className="text-xs text-stone-500 transition group-hover:text-rose-400">↗</span>
               </a>
               <a
-                href="https://tiktok.com"
+                href="https://www.tiktok.com/@kagenoir.jewelry?_r=1&_t=ZS-99LhSChb7Ui"
                 target="_blank"
                 rel="noreferrer"
                 className="group flex items-center justify-between rounded-full border border-stone-700 bg-stone-800/30 px-4 py-3 text-sm font-light text-stone-300 transition hover:border-rose-600/50 hover:bg-rose-900/20 hover:text-rose-300"
