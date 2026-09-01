@@ -1,6 +1,159 @@
 @import "tailwindcss";
 
+:root {
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: #ffffff;
-  color: #1c1917;
+  background: #090d13;
+  color: #e8e0d5;
+  font-size: 16px;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-bottom: max(1rem, var(--safe-area-bottom));
+}
+
+html,
+body {
+  min-height: 100%;
+  background-color: #090d13;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.sakura-layer {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 1;
+}
+
+.sakura-petal {
+  position: absolute;
+  top: -18%;
+  border-radius: 0 100% 0 100%;
+  transform: rotate(20deg);
+  opacity: 1;
+  box-shadow: 0 0 20px rgba(255, 138, 168, 0.6);
+  animation-name: sakura-fall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  filter: drop-shadow(0 0 20px rgba(255, 138, 168, 0.55));
+}
+
+.sakura-petal-burst {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 0 100% 0 100%;
+  z-index: 1;
+  animation-name: sakura-burst;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes sakura-fall {
+  0% {
+    transform: translate3d(0, -12vh, 0) rotate(0deg) scale(0.72);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate3d(var(--drift), 42vh, 0) rotate(145deg) scale(0.98);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate3d(calc(var(--drift) * 0.6), 115vh, 0) rotate(255deg) scale(0.68);
+    opacity: 0;
+  }
+}
+
+@keyframes sakura-burst {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(0.9);
+    opacity: 0;
+  }
+  18% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--burst-x), var(--burst-y), 0) rotate(260deg) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.logo-glow-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.logo-glow-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 10% 12%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 183, 197, 0.2) 0%, rgba(255, 183, 197, 0.1) 25%, rgba(255, 183, 197, 0) 70%);
+  filter: blur(18px);
+  z-index: 0;
+}
+
+.logo-glow-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.logo-glow-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 10% 12%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 183, 197, 0.2) 0%, rgba(255, 183, 197, 0.1) 25%, rgba(255, 183, 197, 0) 70%);
+  filter: blur(18px);
+  z-index: 0;
+}
+
+.logo-glow-wrapper > svg {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 15px;
+  }
+
+  .sakura-petal {
+    filter: blur(0.2px);
+  }
 }

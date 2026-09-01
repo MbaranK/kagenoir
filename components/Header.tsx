@@ -7,18 +7,18 @@ export default async function Header() {
   const isAdmin = await getSession()
 
   return (
-    <header className="bg-white border-b border-stone-200 sticky top-0 z-50">
-      <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+    <header className="bg-white/85 border-b border-stone-200 sticky top-0 z-50 backdrop-blur-sm">
+      <div className="max-w-6xl mx-auto px-3 sm:px-4 h-14 flex items-center justify-between gap-2">
         <Link href="/" className="flex flex-col leading-none hover:opacity-75 transition-opacity min-w-0">
-          <span className="font-[var(--font-playfair)] text-lg font-bold text-stone-800 tracking-wide truncate">
-            Cansın Antik
+          <span className="font-[var(--font-playfair)] text-base sm:text-lg font-bold text-stone-800 tracking-wide truncate">
+            Kagenoir Jewelery
           </span>
-          <span className="text-[9px] tracking-widest text-amber-600 uppercase font-medium">
-            Antika & Koleksiyon
+          <span className="text-[8px] sm:text-[9px] tracking-[0.18em] text-rose-500 uppercase font-medium truncate">
+            Bracelets & Fine Pieces
           </span>
         </Link>
 
-        <nav className="flex items-center gap-2 flex-shrink-0 ml-3">
+        <nav className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0 ml-2">
           {isAdmin ? (
             <>
               <Link

@@ -1,11 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-
-const SABIT_KATEGORILER = ['El İşi', 'Giyim', 'Ev Eşyası', 'Antika', 'Porselen & Cam', 'Tablo & Sanat', 'Mücevher', 'Elektronik', 'Diğer']
+import { PRODUCT_CATEGORIES } from '@/lib/productCategories'
 
 export default function KategoriSecici({ defaultValue }: { defaultValue?: string }) {
-  const baslangicOzel = !!defaultValue && !SABIT_KATEGORILER.includes(defaultValue)
+  const baslangicOzel = !!defaultValue && !PRODUCT_CATEGORIES.includes(defaultValue as (typeof PRODUCT_CATEGORIES)[number])
   const [ozel, setOzel] = useState(baslangicOzel)
   const [deger, setDeger] = useState(defaultValue ?? '')
 
@@ -25,7 +24,7 @@ export default function KategoriSecici({ defaultValue }: { defaultValue?: string
         className="w-full px-4 py-2.5 border border-stone-200 rounded-xl text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-100 bg-white"
       >
         <option value="">Seçin</option>
-        {SABIT_KATEGORILER.map((k) => (
+        {PRODUCT_CATEGORIES.map((k) => (
           <option key={k} value={k}>{k}</option>
         ))}
         <option value="__ozel__">+ Yeni kategori yaz...</option>
@@ -38,7 +37,7 @@ export default function KategoriSecici({ defaultValue }: { defaultValue?: string
           type="text"
           value={deger}
           onChange={(e) => setDeger(e.target.value)}
-          placeholder="Kategori adını yazın (örn: Halı & Kilim)"
+          placeholder="Kategori adını yazın"
           autoFocus
           className="w-full px-4 py-2.5 border border-amber-300 rounded-xl text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-100"
         />

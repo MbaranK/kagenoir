@@ -38,12 +38,12 @@ export default function IlanKarti({ ilan }: IlanKartiProps) {
           )}
         </div>
 
-        <div className="p-2.5">
-          <p className="text-[10px] font-medium text-amber-600 uppercase tracking-wide mb-0.5 truncate">{ilan.kategori}</p>
-          <h3 className="font-medium text-stone-800 text-xs leading-snug line-clamp-2 mb-1.5">
+        <div className="p-2 sm:p-2.5">
+          <p className="text-[9px] sm:text-[10px] font-medium text-amber-600 uppercase tracking-wide mb-0.5 truncate">{ilan.kategori}</p>
+          <h3 className="font-medium text-stone-800 text-[11px] sm:text-xs leading-snug line-clamp-2 mb-1.5 min-h-[2.5em]">
             {ilan.baslik}
           </h3>
-          <span className="text-sm font-bold text-stone-900">
+          <span className="text-xs sm:text-sm font-bold text-stone-900">
             {ilan.fiyat.toLocaleString('tr-TR')} ₺
           </span>
         </div>
