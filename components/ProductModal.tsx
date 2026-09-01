@@ -35,6 +35,9 @@ export default function ProductModal({ ilan, onClose }: ProductModalProps) {
   }
 
   useEffect(() => {
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose()
@@ -42,7 +45,10 @@ export default function ProductModal({ ilan, onClose }: ProductModalProps) {
     }
 
     window.addEventListener('keydown', handleEscape)
-    return () => window.removeEventListener('keydown', handleEscape)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', handleEscape)
+    }
   }, [onClose])
 
   if (!resimler.length) {
@@ -51,23 +57,23 @@ export default function ProductModal({ ilan, onClose }: ProductModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-3 sm:p-5 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-end justify-center bg-black/75 p-0 backdrop-blur-sm sm:items-center sm:p-5"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-5xl overflow-hidden rounded-2xl border border-stone-700/60 bg-stone-900/95 shadow-2xl"
+        className="relative w-full max-h-[82vh] max-w-5xl overflow-hidden rounded-t-[24px] border border-stone-700/60 bg-stone-900/95 shadow-2xl sm:max-h-[92vh] sm:rounded-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-stone-800/80 text-stone-200 hover:bg-stone-700 transition-colors"
+          className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-stone-800/80 text-stone-200 transition-colors hover:bg-stone-700"
           aria-label="Close popup"
         >
           <X className="h-4 w-4" />
         </button>
 
-        <div className="grid md:grid-cols-[1.1fr_0.9fr]">
-          <div className="relative aspect-[4/5] bg-stone-950">
+        <div className="grid max-h-[82vh] grid-cols-1 overflow-hidden md:max-h-[92vh] md:grid-cols-[1.1fr_0.9fr]">
+          <div className="relative h-[40vh] min-h-[260px] bg-stone-950 sm:h-[42vh] md:aspect-[4/5] md:h-auto">
             <Image
               src={resimler[currentImageIndex]}
               alt={ilan.baslik}
@@ -82,7 +88,7 @@ export default function ProductModal({ ilan, onClose }: ProductModalProps) {
               <>
                 <button
                   onClick={handlePrevImage}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full bg-stone-900/70 text-stone-100 hover:bg-stone-800 transition-colors"
+                  className="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-stone-900/70 text-stone-100 transition-colors hover:bg-stone-800"
                   aria-label="Previous image"
                 >
                   <ChevronLeft className="h-5 w-5" />
@@ -90,7 +96,7 @@ export default function ProductModal({ ilan, onClose }: ProductModalProps) {
 
                 <button
                   onClick={handleNextImage}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full bg-stone-900/70 text-stone-100 hover:bg-stone-800 transition-colors"
+                  className="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-stone-900/70 text-stone-100 transition-colors hover:bg-stone-800"
                   aria-label="Next image"
                 >
                   <ChevronRight className="h-5 w-5" />
@@ -105,7 +111,7 @@ export default function ProductModal({ ilan, onClose }: ProductModalProps) {
             )}
           </div>
 
-          <div className="flex flex-col justify-between bg-stone-900/90 p-5 sm:p-6">
+          <div className="flex max-h-[42vh] flex-col justify-between overflow-y-auto bg-stone-900/90 p-4 sm:max-h-none sm:p-6">
             <div>
               <p className="text-[10px] uppercase tracking-[0.2em] text-stone-400">{ilan.kategori}</p>
               <h2 className="mt-2 text-2xl font-light text-stone-100 sm:text-3xl">{ilan.baslik}</h2>
@@ -129,7 +135,7 @@ export default function ProductModal({ ilan, onClose }: ProductModalProps) {
               {ilan.aciklama && (
                 <div className="mt-6 border-t border-stone-700/60 pt-5">
                   <p className="text-[9px] uppercase tracking-[0.18em] text-stone-500">Description</p>
-                  <p className="mt-2 text-sm leading-relaxed text-stone-300 whitespace-pre-wrap">{ilan.aciklama}</p>
+                  <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-stone-300">{ilan.aciklama}</p>
                 </div>
               )}
             </div>

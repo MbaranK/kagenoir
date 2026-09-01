@@ -4,7 +4,7 @@ import { Camera, Music2 } from 'lucide-react'
 function KaghenoirLogo() {
   return (
     <div className="logo-glow-wrapper">
-      <svg viewBox="0 0 300 400" className="h-72 w-72 drop-shadow-2xl">
+      <svg viewBox="0 0 300 400" className="h-52 w-52 drop-shadow-2xl sm:h-64 sm:w-64 lg:h-72 lg:w-72">
         <defs>
           <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
             <feGaussianBlur stdDeviation="1.6" result="coloredBlur" />
@@ -36,22 +36,20 @@ function KaghenoirLogo() {
           KN
         </text>
 
-      {/* Main text KAGENOIR */}
-      <text
-        x="150"
-        y="340"
-        fontSize="24"
-        fontWeight="300"
-        letterSpacing="8"
-        textAnchor="middle"
-        fill="#e8e0d5"
-        fontFamily="'Playfair Display', serif"
-        filter="url(#glow)"
-      >
-        KAGENOIR
-      </text>
+        <text
+          x="150"
+          y="340"
+          fontSize="24"
+          fontWeight="300"
+          letterSpacing="8"
+          textAnchor="middle"
+          fill="#e8e0d5"
+          fontFamily="'Playfair Display', serif"
+          filter="url(#glow)"
+        >
+          KAGENOIR
+        </text>
 
-      {/* Diamond accent */}
         <g fill="#e8e0d5" opacity="0.6" filter="url(#glow)">
           <polygon points="150,305 153,310 150,315 147,310" />
         </g>
@@ -63,12 +61,11 @@ function KaghenoirLogo() {
 export default function AnaSayfa() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950">
-      <div className="grid h-screen grid-cols-3 gap-0">
-        {/* Left Column: Follow Us */}
-        <aside className="flex items-center justify-center px-6 py-8">
-          <div className="w-full rounded-[36px] border border-stone-700/60 bg-stone-900/40 p-8 shadow-2xl backdrop-blur-md">
-            <p className="text-[11px] font-light uppercase tracking-[0.4em] text-stone-400">Follow us</p>
-            <div className="mt-8 space-y-4">
+      <div className="grid min-h-screen grid-cols-1 gap-5 px-4 py-5 sm:px-6 lg:grid-cols-3 lg:gap-0 lg:px-6 lg:py-8">
+        <aside className="flex items-center justify-center lg:px-6 lg:py-8">
+          <div className="w-full max-w-sm rounded-[28px] border border-stone-700/60 bg-stone-900/40 p-5 shadow-2xl backdrop-blur-md sm:max-w-md lg:max-w-full lg:p-8">
+            <p className="text-[10px] font-light uppercase tracking-[0.4em] text-stone-400 sm:text-[11px]">Follow us</p>
+            <div className="mt-5 space-y-3 sm:mt-8 sm:space-y-4">
               <a
                 href="https://instagram.com"
                 target="_blank"
@@ -97,35 +94,33 @@ export default function AnaSayfa() {
           </div>
         </aside>
 
-        {/* Middle Column: Kagenoir Logo */}
-        <main className="flex items-center justify-center px-6 py-8 text-center">
-          <div className="flex flex-col items-center gap-8">
-            <p className="text-[10px] font-light uppercase tracking-[0.5em] text-stone-500">
+        <main className="order-[-1] flex items-center justify-center px-2 py-4 text-center sm:px-4 lg:order-none lg:px-6 lg:py-8">
+          <div className="flex flex-col items-center gap-4 sm:gap-6 lg:gap-8">
+            <p className="text-[9px] font-light uppercase tracking-[0.45em] text-stone-500 sm:text-[10px] lg:text-[10px]">
               Silver jewelry atelier
             </p>
 
             <KaghenoirLogo />
 
-            <p className="mx-auto max-w-sm text-sm font-light leading-relaxed text-stone-400">
+            <p className="mx-auto max-w-xs text-xs font-light leading-relaxed text-stone-400 sm:max-w-sm sm:text-sm">
               Hand-finished silver bracelets, sculpted for those who walk between two worlds—where the light does not reach.
             </p>
-            
-            <p className="text-[9px] uppercase tracking-[0.3em] text-stone-600">
+
+            <p className="text-[8px] uppercase tracking-[0.3em] text-stone-600 sm:text-[9px]">
               Est. Istanbul
             </p>
           </div>
         </main>
 
-        {/* Right Column: Shop */}
-        <aside className="flex items-center justify-center px-6 py-8">
-          <div className="flex w-full flex-col items-center gap-8 rounded-[36px] border border-stone-700/60 bg-stone-900/40 px-8 py-8 text-center shadow-2xl backdrop-blur-md">
+        <aside className="flex items-center justify-center lg:px-6 lg:py-8">
+          <div className="flex w-full max-w-sm flex-col items-center gap-5 rounded-[28px] border border-stone-700/60 bg-stone-900/40 px-6 py-6 text-center shadow-2xl backdrop-blur-md sm:max-w-md lg:max-w-full lg:gap-8 lg:px-8 lg:py-8">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.4em] text-stone-400 font-light">Curated</p>
-              <p className="mt-1 text-[11px] uppercase tracking-[0.4em] text-stone-400 font-light">pieces</p>
+              <p className="text-[10px] font-light uppercase tracking-[0.4em] text-stone-400 sm:text-[11px]">Curated</p>
+              <p className="mt-1 text-[10px] font-light uppercase tracking-[0.4em] text-stone-400 sm:text-[11px]">pieces</p>
             </div>
             <Link
               href="/shop"
-              className="inline-flex items-center justify-center rounded-full border border-stone-700 bg-stone-800/30 px-8 py-3 text-[12px] font-light uppercase tracking-[0.28em] text-stone-300 transition hover:border-rose-600/50 hover:bg-rose-900/20 hover:text-rose-300"
+              className="inline-flex items-center justify-center rounded-full border border-stone-700 bg-stone-800/30 px-7 py-3 text-[11px] font-light uppercase tracking-[0.28em] text-stone-300 transition hover:border-rose-600/50 hover:bg-rose-900/20 hover:text-rose-300 sm:px-8 sm:text-[12px]"
             >
               Shop
             </Link>

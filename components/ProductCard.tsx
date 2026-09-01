@@ -37,29 +37,28 @@ export default function ProductCard({ ilan, onViewDetails }: ProductCardProps) {
   return (
     <button
       onClick={onViewDetails}
-      className="w-full group text-left active:scale-[0.98] transition-transform"
+      className="group w-full text-left transition-transform active:scale-[0.98]"
+      aria-label={`View details for ${ilan.baslik}`}
     >
-      <div className="bg-stone-800/50 rounded-xl overflow-hidden border border-stone-700/60 hover:border-stone-600 hover:shadow-xl transition-all duration-200 backdrop-blur-sm cursor-pointer pointer-events-none">
-        {/* Image Container */}
-        <div className="aspect-square bg-stone-900 relative overflow-hidden">
+      <div className="overflow-hidden rounded-[18px] border border-stone-700/60 bg-stone-800/50 backdrop-blur-sm transition-all duration-200 hover:border-stone-600 hover:shadow-xl">
+        <div className="relative aspect-[4/3.6] overflow-hidden bg-stone-900 sm:aspect-[4/4.6]">
           {currentImage ? (
             <Image
               src={currentImage}
               alt={ilan.baslik}
               fill
-              className="object-cover group-hover:scale-105 transition-transform duration-300"
-              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
               unoptimized={currentImage.startsWith('/uploads/')}
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-stone-600">
-              <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="flex h-full w-full items-center justify-center text-stone-600">
+              <svg className="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
             </div>
           )}
 
-          {/* Arrow Navigation */}
           {resimler.length > 1 && (
             <>
               <div
@@ -68,9 +67,9 @@ export default function ProductCard({ ilan, onViewDetails }: ProductCardProps) {
                   e.preventDefault()
                   handlePrevImage(e)
                 }}
-                className="absolute left-2 top-1/2 -translate-y-1/2 bg-stone-900/60 hover:bg-stone-900 text-stone-200 hover:text-stone-100 p-1.5 rounded-full transition opacity-0 group-hover:opacity-100 backdrop-blur-sm cursor-pointer"
+                className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-stone-900/60 p-1.5 text-stone-200 opacity-0 transition hover:bg-stone-900 hover:text-stone-100 group-hover:opacity-100"
               >
-                <ChevronLeft className="w-5 h-5 pointer-events-none" />
+                <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
               </div>
 
               <div
@@ -79,28 +78,26 @@ export default function ProductCard({ ilan, onViewDetails }: ProductCardProps) {
                   e.preventDefault()
                   handleNextImage(e)
                 }}
-                className="absolute right-2 top-1/2 -translate-y-1/2 bg-stone-900/60 hover:bg-stone-900 text-stone-200 hover:text-stone-100 p-1.5 rounded-full transition opacity-0 group-hover:opacity-100 backdrop-blur-sm cursor-pointer"
+                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-stone-900/60 p-1.5 text-stone-200 opacity-0 transition hover:bg-stone-900 hover:text-stone-100 group-hover:opacity-100"
               >
-                <ChevronRight className="w-5 h-5 pointer-events-none" />
+                <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
               </div>
 
-              {/* Image Counter */}
-              <div className="absolute bottom-2 right-2 bg-stone-900/60 backdrop-blur-sm px-2 py-1 rounded-full text-[10px] text-stone-300 pointer-events-none">
+              <div className="absolute bottom-2 right-2 rounded-full bg-stone-900/60 px-2 py-1 text-[10px] text-stone-300 backdrop-blur-sm">
                 {currentImageIndex + 1}/{resimler.length}
               </div>
             </>
           )}
         </div>
 
-        {/* Info Section */}
-        <div className="p-3 sm:p-3.5">
-          <p className="text-[9px] sm:text-[10px] font-light text-stone-400 uppercase tracking-[0.2em] mb-1">
+        <div className="p-2 sm:p-3">
+          <p className="mb-1 text-[8px] font-light uppercase tracking-[0.16em] text-stone-400 sm:text-[10px]">
             {ilan.kategori}
           </p>
-          <h3 className="font-light text-stone-100 text-[11px] sm:text-xs leading-snug line-clamp-2 mb-2 min-h-[2.5em]">
+          <h3 className="mb-1.5 min-h-[2.1em] text-[10px] font-light leading-snug text-stone-100 sm:text-xs">
             {ilan.baslik}
           </h3>
-          <span className="text-sm sm:text-base font-light text-stone-300">
+          <span className="text-sm font-light text-stone-300 sm:text-base">
             {ilan.fiyat.toLocaleString('tr-TR')} ₺
           </span>
         </div>
