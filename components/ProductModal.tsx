@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
+import { useLanguage } from '@/components/LanguageProvider'
 
 interface ProductModalProps {
   ilan: {
@@ -21,6 +22,8 @@ interface ProductModalProps {
 }
 
 export default function ProductModal({ ilan, onClose }: ProductModalProps) {
+  const { language } = useLanguage()
+  const isTurkish = language === 'tr'
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const resimler: string[] = JSON.parse(ilan.resimler)
   const dimensions = typeof (ilan as any).olculer === 'string' ? (ilan as any).olculer : 'Standard fit'
@@ -67,7 +70,7 @@ export default function ProductModal({ ilan, onClose }: ProductModalProps) {
         <button
           onClick={onClose}
           className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-stone-800/80 text-stone-200 transition-colors hover:bg-stone-700"
-          aria-label="Close popup"
+          aria-label={isTurkish ? 'Pencereyi kapat' : 'Close popup'}
         >
           <X className="h-4 w-4" />
         </button>
@@ -89,7 +92,7 @@ export default function ProductModal({ ilan, onClose }: ProductModalProps) {
                 <button
                   onClick={handlePrevImage}
                   className="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-stone-900/70 text-stone-100 transition-colors hover:bg-stone-800"
-                  aria-label="Previous image"
+                  aria-label={isTurkish ? 'Önceki görsel' : 'Previous image'}
                 >
                   <ChevronLeft className="h-5 w-5" />
                 </button>
@@ -97,7 +100,7 @@ export default function ProductModal({ ilan, onClose }: ProductModalProps) {
                 <button
                   onClick={handleNextImage}
                   className="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-stone-900/70 text-stone-100 transition-colors hover:bg-stone-800"
-                  aria-label="Next image"
+                  aria-label={isTurkish ? 'Sonraki görsel' : 'Next image'}
                 >
                   <ChevronRight className="h-5 w-5" />
                 </button>
@@ -113,7 +116,7 @@ export default function ProductModal({ ilan, onClose }: ProductModalProps) {
 
           <div className="flex max-h-[42vh] flex-col justify-between overflow-y-auto bg-stone-900/90 p-4 sm:max-h-none sm:p-6">
             <div>
-              <p className="text-[10px] uppercase tracking-[0.2em] text-stone-400">{ilan.kategori}</p>
+              <p className="text-[10px] uppercase tracking-[0.2em] text-stone-400">{isTurkish ? ({ Male: 'Erkek', Woman: 'Kadın', 'Sakura Collection': 'Sakura Koleksiyonu', 'Shuriken Collection': 'Shuriken Koleksiyonu' }[ilan.kategori] ?? ilan.kategori) : ilan.kategori}</p>
               <h2 className="mt-2 text-2xl font-light text-stone-100 sm:text-3xl">{ilan.baslik}</h2>
 
               <div className="mt-4 text-2xl font-light text-stone-200 sm:text-3xl">
@@ -122,19 +125,19 @@ export default function ProductModal({ ilan, onClose }: ProductModalProps) {
 
               <div className="mt-6 space-y-3 border-t border-stone-700/60 pt-5">
                 <div className="rounded-xl border border-stone-700/50 bg-stone-800/30 p-3">
-                  <p className="text-[9px] uppercase tracking-[0.18em] text-stone-500">Dimensions</p>
+                  <p className="text-[9px] uppercase tracking-[0.18em] text-stone-500">{isTurkish ? 'Ölçüler' : 'Dimensions'}</p>
                   <p className="mt-1 text-sm text-stone-200">{dimensions}</p>
                 </div>
 
                 <div className="rounded-xl border border-stone-700/50 bg-stone-800/30 p-3">
-                  <p className="text-[9px] uppercase tracking-[0.18em] text-stone-500">Material</p>
+                  <p className="text-[9px] uppercase tracking-[0.18em] text-stone-500">{isTurkish ? 'Malzeme' : 'Material'}</p>
                   <p className="mt-1 text-sm text-stone-200">{material}</p>
                 </div>
               </div>
 
               {ilan.aciklama && (
                 <div className="mt-6 border-t border-stone-700/60 pt-5">
-                  <p className="text-[9px] uppercase tracking-[0.18em] text-stone-500">Description</p>
+                  <p className="text-[9px] uppercase tracking-[0.18em] text-stone-500">{isTurkish ? 'Açıklama' : 'Description'}</p>
                   <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-stone-300">{ilan.aciklama}</p>
                 </div>
               )}
@@ -149,7 +152,7 @@ export default function ProductModal({ ilan, onClose }: ProductModalProps) {
                     className={`relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-lg border transition-all ${
                       i === currentImageIndex ? 'border-stone-200' : 'border-stone-700 hover:border-stone-500'
                     }`}
-                    aria-label={`View image ${i + 1}`}
+                    aria-label={isTurkish ? `${i + 1}. görseli görüntüle` : `View image ${i + 1}`}
                   >
                     <Image
                       src={url}

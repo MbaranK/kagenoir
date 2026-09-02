@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useLanguage } from '@/components/LanguageProvider'
 
 interface ProductCardProps {
   ilan: {
@@ -17,6 +18,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ ilan, onViewDetails }: ProductCardProps) {
+  const { language } = useLanguage()
   const resimler: string[] = JSON.parse(ilan.resimler)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
@@ -33,6 +35,9 @@ export default function ProductCard({ ilan, onViewDetails }: ProductCardProps) {
   }
 
   const currentImage = resimler[currentImageIndex] || null
+  const categoryLabel = language === 'tr'
+    ? ({ Male: 'Erkek', Woman: 'Kadın', 'Sakura Collection': 'Sakura Koleksiyonu', 'Shuriken Collection': 'Shuriken Koleksiyonu' }[ilan.kategori] ?? ilan.kategori)
+    : ilan.kategori
 
   return (
     <button
@@ -92,7 +97,7 @@ export default function ProductCard({ ilan, onViewDetails }: ProductCardProps) {
 
         <div className="p-2 sm:p-3">
           <p className="mb-1 text-[8px] font-light uppercase tracking-[0.16em] text-stone-400 sm:text-[10px]">
-            {ilan.kategori}
+            {categoryLabel}
           </p>
           <h3 className="mb-1.5 min-h-[2.1em] text-[10px] font-light leading-snug text-stone-100 sm:text-xs">
             {ilan.baslik}

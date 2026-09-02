@@ -1,5 +1,8 @@
+'use client'
+
 import Link from 'next/link'
 import { Camera, Music2 } from 'lucide-react'
+import { useLanguage } from '@/components/LanguageProvider'
 
 function KaghenoirLogo() {
   return (
@@ -59,6 +62,9 @@ function KaghenoirLogo() {
 }
 
 export default function AnaSayfa() {
+  const { language } = useLanguage()
+  const isTurkish = language === 'tr'
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950">
       <div className="grid min-h-screen grid-cols-1 gap-5 px-4 py-5 sm:px-6 lg:grid-cols-3 lg:gap-0 lg:px-6 lg:py-8">
@@ -97,17 +103,19 @@ export default function AnaSayfa() {
         <main className="order-[-1] flex items-center justify-center px-2 py-4 text-center sm:px-4 lg:order-none lg:px-6 lg:py-8">
           <div className="flex flex-col items-center gap-4 sm:gap-6 lg:gap-8">
             <p className="text-[9px] font-light uppercase tracking-[0.45em] text-stone-500 sm:text-[10px] lg:text-[10px]">
-              Silver jewelry atelier
+              {isTurkish ? 'Gümüş takı atölyesi' : 'Silver jewelry atelier'}
             </p>
 
             <KaghenoirLogo />
 
             <p className="mx-auto max-w-xs text-xs font-light leading-relaxed text-stone-400 sm:max-w-sm sm:text-sm">
-              Hand-finished silver bracelets, sculpted for those who walk between two worlds—where the light does not reach.
+              {isTurkish
+                ? 'İki dünya arasında yürüyenler için şekillendirilmiş, elde tamamlanan gümüş bileklikler.'
+                : 'Hand-finished silver bracelets, sculpted for those who walk between two worlds—where the light does not reach.'}
             </p>
 
             <p className="text-[8px] uppercase tracking-[0.3em] text-stone-600 sm:text-[9px]">
-              Est. Istanbul
+              {isTurkish ? 'İstanbul merkezli' : 'Est. Istanbul'}
             </p>
           </div>
         </main>
@@ -115,14 +123,14 @@ export default function AnaSayfa() {
         <aside className="flex items-center justify-center lg:px-6 lg:py-8">
           <div className="flex w-full max-w-sm flex-col items-center gap-5 rounded-[28px] border border-stone-700/60 bg-stone-900/40 px-6 py-6 text-center shadow-2xl backdrop-blur-md sm:max-w-md lg:max-w-full lg:gap-8 lg:px-8 lg:py-8">
             <div>
-              <p className="text-[10px] font-light uppercase tracking-[0.4em] text-stone-400 sm:text-[11px]">Curated</p>
-              <p className="mt-1 text-[10px] font-light uppercase tracking-[0.4em] text-stone-400 sm:text-[11px]">pieces</p>
+              <p className="text-[10px] font-light uppercase tracking-[0.4em] text-stone-400 sm:text-[11px]">{isTurkish ? 'Seçkin' : 'Curated'}</p>
+              <p className="mt-1 text-[10px] font-light uppercase tracking-[0.4em] text-stone-400 sm:text-[11px]">{isTurkish ? 'parçalar' : 'pieces'}</p>
             </div>
             <Link
               href="/shop"
               className="inline-flex items-center justify-center rounded-full border border-stone-700 bg-stone-800/30 px-7 py-3 text-[11px] font-light uppercase tracking-[0.28em] text-stone-300 transition hover:border-rose-600/50 hover:bg-rose-900/20 hover:text-rose-300 sm:px-8 sm:text-[12px]"
             >
-              Shop
+              {isTurkish ? 'Mağaza' : 'Shop'}
             </Link>
           </div>
         </aside>

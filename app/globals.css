@@ -148,6 +148,40 @@ select {
   z-index: 1;
 }
 
+.language-switcher {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid rgba(231, 225, 215, 0.28);
+  border-radius: 999px;
+  background: rgba(20, 18, 17, 0.78);
+  backdrop-filter: blur(12px);
+}
+
+.language-option {
+  border: 0;
+  background: transparent;
+  color: #8f8981;
+  cursor: pointer;
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  padding: 0.3rem 0.2rem 0.3rem 0.35rem;
+}
+
+.language-option-active {
+  color: #ffd0da;
+}
+
+.language-divider {
+  color: #5d5752;
+  font-size: 0.7rem;
+}
+
 @media (max-width: 480px) {
   body {
     font-size: 15px;
