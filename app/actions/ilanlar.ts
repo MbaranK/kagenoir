@@ -21,6 +21,7 @@ export async function ilanEkle(prevState: string | null, formData: FormData) {
   const olculer = (formData.get('olculer') as string)?.trim() || null
   const malzeme = (formData.get('malzeme') as string)?.trim() || null
   const resimlerRaw = formData.get('resimler') as string
+  const submissionId = (formData.get('submissionId') as string)?.trim() || null
 
   if (!baslik || !aciklama || isNaN(fiyat) || !kategori) {
     return 'Lütfen tüm zorunlu alanları doldurun.'
@@ -28,8 +29,15 @@ export async function ilanEkle(prevState: string | null, formData: FormData) {
 
   const resimler = resimlerRaw ? JSON.parse(resimlerRaw) : []
 
+  if (submissionId) {
+    const existing = await prisma.ilan.findUnique({ where: { submissionId } })
+    if (existing) {
+      redirect('/admin')
+    }
+  }
+
   await prisma.ilan.create({
-    data: { baslik, aciklama, fiyat, kategori, konum, olculer, malzeme, resimler: JSON.stringify(resimler) },
+    data: { submissionId, baslik, aciklama, fiyat, kategori, konum, olculer, malzeme, resimler: JSON.stringify(resimler) },
   })
 
   revalidatePath('/')

@@ -9,6 +9,7 @@ import { ArrowLeft, Loader2 } from 'lucide-react'
 
 export default function YeniIlanPage() {
   const [resimler, setResimler] = useState<string[]>([])
+  const [submissionId] = useState(() => crypto.randomUUID())
   const [error, action, pending] = useActionState(ilanEkle, null)
 
   return (
@@ -21,6 +22,7 @@ export default function YeniIlanPage() {
       <h1 className="text-2xl font-bold text-stone-900 mb-6">Yeni İlan Ekle</h1>
 
       <form action={action} className="bg-white rounded-2xl border border-stone-100 shadow-sm p-6 space-y-5">
+        <input type="hidden" name="submissionId" value={submissionId} />
         {error && (
           <div className="bg-red-50 border border-red-100 text-red-600 text-sm px-4 py-3 rounded-lg">
             {error}
