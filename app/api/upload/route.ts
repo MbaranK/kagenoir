@@ -43,7 +43,8 @@ export async function POST(request: NextRequest) {
     })
     return NextResponse.json({ url: result.secure_url })
   } catch (error) {
-    const cloudinaryMessage = error instanceof Error ? error.message : 'Bilinmeyen Cloudinary hatası'
+    const cloudinaryError = error as { error?: { message?: string }; message?: string }
+    const cloudinaryMessage = cloudinaryError.error?.message || cloudinaryError.message || 'Bilinmeyen Cloudinary hatası'
     return NextResponse.json(
       { error: `Cloudinary yüklemesi başarısız: ${cloudinaryMessage}` },
       { status: 502 },
