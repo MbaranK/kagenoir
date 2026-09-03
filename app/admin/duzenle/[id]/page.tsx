@@ -15,6 +15,8 @@ interface IlanData {
   fiyat: number
   kategori: string
   konum: string | null
+  olculer: string | null
+  malzeme: string | null
   resimler: string
   aktif: boolean
 }
@@ -116,6 +118,35 @@ export default function DuzenleIlanPage({ params }: { params: Promise<{ id: stri
             defaultValue={ilan.konum || ''}
             className="w-full px-4 py-2.5 border border-stone-200 rounded-xl text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-100"
           />
+        </div>
+
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div>
+            <label htmlFor="olculer" className="block text-sm font-medium text-stone-700 mb-1.5">
+              Ölçüler <span className="text-stone-400 font-normal">(isteğe bağlı)</span>
+            </label>
+            <input
+              id="olculer"
+              name="olculer"
+              type="text"
+              defaultValue={ilan.olculer || ''}
+              className="w-full px-4 py-2.5 border border-stone-200 rounded-xl text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-100"
+              placeholder="18 cm + 2 cm uzatma"
+            />
+          </div>
+          <div>
+            <label htmlFor="malzeme" className="block text-sm font-medium text-stone-700 mb-1.5">
+              Malzeme <span className="text-stone-400 font-normal">(isteğe bağlı)</span>
+            </label>
+            <input
+              id="malzeme"
+              name="malzeme"
+              type="text"
+              defaultValue={ilan.malzeme || ''}
+              className="w-full px-4 py-2.5 border border-stone-200 rounded-xl text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-100"
+              placeholder="925 ayar gümüş"
+            />
+          </div>
         </div>
 
         <div>

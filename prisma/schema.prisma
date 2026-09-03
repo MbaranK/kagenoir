@@ -15,6 +15,8 @@ model Ilan {
   fiyat     Float
   kategori  String
   konum     String?
+  olculer   String?
+  malzeme   String?
   resimler  String   // JSON array of Cloudinary URLs
   aktif     Boolean  @default(true)
   createdAt DateTime @default(now())

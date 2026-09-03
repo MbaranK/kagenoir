@@ -18,6 +18,8 @@ export async function ilanEkle(prevState: string | null, formData: FormData) {
   const fiyat = parseFloat(formData.get('fiyat') as string)
   const kategori = (formData.get('kategori') as string)?.trim()
   const konum = (formData.get('konum') as string)?.trim() || null
+  const olculer = (formData.get('olculer') as string)?.trim() || null
+  const malzeme = (formData.get('malzeme') as string)?.trim() || null
   const resimlerRaw = formData.get('resimler') as string
 
   if (!baslik || !aciklama || isNaN(fiyat) || !kategori) {
@@ -27,7 +29,7 @@ export async function ilanEkle(prevState: string | null, formData: FormData) {
   const resimler = resimlerRaw ? JSON.parse(resimlerRaw) : []
 
   await prisma.ilan.create({
-    data: { baslik, aciklama, fiyat, kategori, konum, resimler: JSON.stringify(resimler) },
+    data: { baslik, aciklama, fiyat, kategori, konum, olculer, malzeme, resimler: JSON.stringify(resimler) },
   })
 
   revalidatePath('/')
@@ -42,6 +44,8 @@ export async function ilanGuncelle(id: string, prevState: string | null, formDat
   const fiyat = parseFloat(formData.get('fiyat') as string)
   const kategori = (formData.get('kategori') as string)?.trim()
   const konum = (formData.get('konum') as string)?.trim() || null
+  const olculer = (formData.get('olculer') as string)?.trim() || null
+  const malzeme = (formData.get('malzeme') as string)?.trim() || null
   const resimlerRaw = formData.get('resimler') as string
   const aktif = formData.get('aktif') === 'true'
 
@@ -53,7 +57,7 @@ export async function ilanGuncelle(id: string, prevState: string | null, formDat
 
   await prisma.ilan.update({
     where: { id },
-    data: { baslik, aciklama, fiyat, kategori, konum, aktif, resimler: JSON.stringify(resimler) },
+    data: { baslik, aciklama, fiyat, kategori, konum, olculer, malzeme, aktif, resimler: JSON.stringify(resimler) },
   })
 
   revalidatePath('/')

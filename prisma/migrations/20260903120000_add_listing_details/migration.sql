@@ -1,0 +1,3 @@
+ALTER TABLE "Ilan"
+ADD COLUMN "olculer" TEXT,
+ADD COLUMN "malzeme" TEXT;
