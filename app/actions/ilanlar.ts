@@ -67,8 +67,11 @@ export async function ilanGuncelle(id: string, prevState: string | null, formDat
 
 export async function ilanSil(id: string) {
   await requireAuth()
-  await prisma.ilan.delete({ where: { id } })
+  await prisma.ilan.deleteMany({ where: { id } })
   revalidatePath('/')
+  revalidatePath('/shop')
+  revalidatePath('/admin')
+  revalidatePath(`/ilan/${id}`)
   redirect('/admin')
 }
 
