@@ -11,6 +11,9 @@ export default function KategoriSecici({ defaultValue }: { defaultValue?: string
   return (
     <div className="space-y-2">
       <select
+        name={ozel ? undefined : 'kategori'}
+        required={!ozel}
+        value={ozel ? '__ozel__' : deger}
         onChange={(e) => {
           if (e.target.value === '__ozel__') {
             setOzel(true)
@@ -20,7 +23,7 @@ export default function KategoriSecici({ defaultValue }: { defaultValue?: string
             setDeger(e.target.value)
           }
         }}
-        defaultValue={baslangicOzel ? '__ozel__' : (defaultValue ?? '')}
+        disabled={ozel}
         className="w-full px-4 py-2.5 border border-stone-200 rounded-xl text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-100 bg-white"
       >
         <option value="">Seçin</option>
@@ -41,9 +44,7 @@ export default function KategoriSecici({ defaultValue }: { defaultValue?: string
           autoFocus
           className="w-full px-4 py-2.5 border border-amber-300 rounded-xl text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-100"
         />
-      ) : (
-        <input type="hidden" name="kategori" value={deger} />
-      )}
+      ) : null}
     </div>
   )
 }
