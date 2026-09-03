@@ -33,6 +33,8 @@ export async function ilanEkle(prevState: string | null, formData: FormData) {
   })
 
   revalidatePath('/')
+  revalidatePath('/shop')
+  revalidatePath('/admin')
   redirect('/admin')
 }
 
@@ -61,6 +63,8 @@ export async function ilanGuncelle(id: string, prevState: string | null, formDat
   })
 
   revalidatePath('/')
+  revalidatePath('/shop')
+  revalidatePath('/admin')
   revalidatePath(`/ilan/${id}`)
   redirect('/admin')
 }

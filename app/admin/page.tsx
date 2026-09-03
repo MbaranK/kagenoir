@@ -5,6 +5,8 @@ import { ilanDurumDegistir } from '@/app/actions/ilanlar'
 import SilButonu from '@/components/SilButonu'
 import { PlusCircle, Pencil, Eye, EyeOff, Package } from 'lucide-react'
 
+export const dynamic = 'force-dynamic'
+
 export default async function AdminSayfa() {
   const ilanlar = await prisma.ilan.findMany({ orderBy: { createdAt: 'desc' } })
 

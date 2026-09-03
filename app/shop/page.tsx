@@ -2,6 +2,8 @@ import { prisma } from '@/lib/prisma'
 import { defaultBracelets } from '@/lib/bracelets'
 import ShopContent from '@/components/ShopContent'
 
+export const dynamic = 'force-dynamic'
+
 export default async function ShopPage() {
   let ilanlar = defaultBracelets
 
