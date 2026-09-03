@@ -6,7 +6,9 @@ import { join } from 'path'
 // Cloudinary kuruluysa onu kullan, yoksa yerel diske kaydet
 const cloudinaryKurulu =
   process.env.CLOUDINARY_CLOUD_NAME &&
-  process.env.CLOUDINARY_CLOUD_NAME !== 'buraya-cloud-name-girin'
+  process.env.CLOUDINARY_CLOUD_NAME !== 'buraya-cloud-name-girin' &&
+  process.env.CLOUDINARY_API_KEY &&
+  process.env.CLOUDINARY_API_SECRET
 
 export async function POST(request: NextRequest) {
   const ok = await getSession()
@@ -20,7 +22,14 @@ export async function POST(request: NextRequest) {
   const bytes = await file.arrayBuffer()
   const buffer = Buffer.from(bytes)
 
-  if (cloudinaryKurulu) {
+  if (!cloudinaryKurulu) {
+    return NextResponse.json(
+      { error: 'Cloudinary yapılandırması eksik. Vercel ortam değişkenlerini kontrol edip yeniden deploy edin.' },
+      { status: 503 },
+    )
+  }
+
+  try {
     const { v2: cloudinary } = await import('cloudinary')
     cloudinary.config({
       cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -29,10 +38,15 @@ export async function POST(request: NextRequest) {
     })
     const base64 = `data:${file.type};base64,${buffer.toString('base64')}`
     const result = await cloudinary.uploader.upload(base64, {
-      folder: 'cansin-antik',
+      folder: 'kagenoir',
       transformation: [{ width: 1200, height: 900, crop: 'limit', quality: 'auto' }],
     })
     return NextResponse.json({ url: result.secure_url })
+  } catch {
+    return NextResponse.json(
+      { error: 'Cloudinary yüklemesi başarısız. Cloud name, API key ve API secret değerlerini kontrol edin.' },
+      { status: 502 },
+    )
   }
 
   // Yerel kayıt (geliştirme ortamı)

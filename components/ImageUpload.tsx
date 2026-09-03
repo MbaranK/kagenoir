@@ -26,18 +26,18 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
         const formData = new FormData()
         formData.append('file', file)
         const res = await fetch('/api/upload', { method: 'POST', body: formData })
-        const data = await res.json()
-        if (data.url) {
+        const data = await res.json().catch(() => ({}))
+        if (res.ok && data.url) {
           uploadedUrls.push(data.url)
         } else {
-          setHata(data.error || 'Yükleme başarısız oldu.')
+          throw new Error(data.error || `Yükleme başarısız oldu (${res.status}).`)
         }
       }
       if (uploadedUrls.length > 0) {
         onChange([...value, ...uploadedUrls])
       }
-    } catch {
-      setHata('Bağlantı hatası, tekrar deneyin.')
+    } catch (error) {
+      setHata(error instanceof Error ? error.message : 'Yükleme başarısız oldu.')
     } finally {
       setUploading(false)
       if (inputRef.current) inputRef.current.value = ''
