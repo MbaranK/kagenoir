@@ -42,9 +42,10 @@ export async function POST(request: NextRequest) {
       transformation: [{ width: 1200, height: 900, crop: 'limit', quality: 'auto' }],
     })
     return NextResponse.json({ url: result.secure_url })
-  } catch {
+  } catch (error) {
+    const cloudinaryMessage = error instanceof Error ? error.message : 'Bilinmeyen Cloudinary hatası'
     return NextResponse.json(
-      { error: 'Cloudinary yüklemesi başarısız. Cloud name, API key ve API secret değerlerini kontrol edin.' },
+      { error: `Cloudinary yüklemesi başarısız: ${cloudinaryMessage}` },
       { status: 502 },
     )
   }
